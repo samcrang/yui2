@@ -92,6 +92,7 @@
                 </div>
             </div>
             <div id="1">numbered id</div>
+            <div id="prefix" prefix:id="prefix"></div>
         </div>
         <div id="ft">
             <p>In hac habitasse platea dictumst. Sed sit amet ligula vitae justo consequat facilisis. Integer tortor. Integer erat. In hac habitasse platea dictumst. Phasellus convallis quam vitae turpis aliquam lobortis. Aliquam scelerisque condimentum lectus. Proin semper adipiscing leo. Nulla facilisi.</p>
@@ -609,12 +610,14 @@
 
 
             test_getAttribute: function() {
-                var el = document.createElement('label');
-                Y.Dom.setAttribute(el, 'for', 'foo');                
-                Y.Dom.setAttribute(el, 'class', 'bar');                
+                var el = document.createElement('label'),
+                    prefix = document.getElementById('prefix');
+					
+                Y.Dom.setAttribute(el, 'for', 'foo');
+                Y.Dom.setAttribute(el, 'class', 'bar');
 
                 Assert.areEqual('foo', Y.Dom.getAttribute(el, 'for'), "Y.Dom.getAttribute(el, 'for')");
-                Assert.areEqual('bar', Y.Dom.getAttribute(el, 'class'), "Y.Dom.setAttribute(el, 'class')");
+                Assert.areEqual('bar', Y.Dom.getAttribute(el, 'class'), "Y.Dom.getAttribute(el, 'class')");
 
                 var bodyEl = new Y.Element(Y.Dom.generateId(document.body));
                 Y.Dom.addClass(bodyEl, 'dummy');
@@ -625,6 +628,8 @@
 
                 el = document.getElementsByTagName('script')[0];
                 Assert.areEqual('../../../build/yahoo/yahoo.js', Y.Dom.getAttribute(el, 'src'), "Y.Dom.getAttribute(el, 'src')");
+				
+                Assert.areEqual('prefix', Y.Dom.getAttribute(prefix, 'id'), "Y.Dom.getAttribute(prefix, 'id')");
             },
 
             test_toHex: function() {
