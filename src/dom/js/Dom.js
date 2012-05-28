@@ -1251,7 +1251,7 @@
             //
             // http://www.quirksmode.org/dom/w3c_core.html#attributes
             //
-            if (!val && el[attr] !== null) {
+            if (!val && el[attr]) {
                 val = el[attr];
             }
 
