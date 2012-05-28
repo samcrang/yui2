@@ -1203,7 +1203,16 @@
             } else {
             }
 
-            return val;
+            //
+            // Workaround for IE9.
+            //
+            // http://www.quirksmode.org/dom/w3c_core.html#attributes
+            //
+            if (!val && el[attr] !== null) {
+                val = el[attr];
+            }
+
+            return val; 
         },
 
         _toCamel: function(property) {

@@ -1241,7 +1241,21 @@
                 YAHOO.log('getAttribute method not available for ' + el, 'error', 'Dom');
             }
 
-            return val;
+            //
+            // Workaround for IE9. 
+            //
+            // In IE9 when an element has both an `id` and another attribute using
+            // the non-standard, totally horrible `prefix:id` style then a call
+            // to this function asking for `id` will return `null`. This extra check
+            // looks for a property on the `el` object before giving up and returning.
+            //
+            // http://www.quirksmode.org/dom/w3c_core.html#attributes
+            //
+            if (!val && el[attr] !== null) {
+                val = el[attr];
+            }
+
+            return val; 
         },
 
         _toCamel: function(property) {
