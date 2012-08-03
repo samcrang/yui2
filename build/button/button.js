@@ -957,8 +957,6 @@
 
 						}
 
-						oMenu.cfg.queueProperty("clicktohide", false);
-
 						oMenu.keyDownEvent.subscribe(this._onMenuKeyDown, this, true);
 						oMenu.subscribe("click", this._onMenuClick, this, true);
 
